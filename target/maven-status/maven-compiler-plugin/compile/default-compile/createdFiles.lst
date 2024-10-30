@@ -1,0 +1,17 @@
+modelo\Ensamble.class
+modelo\Transporte.class
+com\mycompany\menuadmin\JakartaRestConfiguration.class
+modelo\Proveedor.class
+util\SQLConexion.class
+dao\Negocio.class
+modelo\Juegos.class
+util\MySQLConexion.class
+modelo\Empleado.class
+controlador\qr.class
+modelo\Compra.class
+modelo\Cliente.class
+modelo\Factura.class
+modelo\Producto.class
+controlador\control.class
+modelo\Admin.class
+com\mycompany\menuadmin\resources\JakartaEE8Resource.class

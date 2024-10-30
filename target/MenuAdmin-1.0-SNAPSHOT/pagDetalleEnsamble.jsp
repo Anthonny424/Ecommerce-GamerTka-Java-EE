@@ -1,0 +1,90 @@
+
+
+<%@page import="modelo.Ensamble"%>
+<%@page import="dao.Negocio"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="css/Estilos.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>JSP Page</title>
+    </head>
+    <body style="
+          background-image: url(https://i.pinimg.com/originals/4b/cd/6b/4bcd6b314a8bba1f278bb12315bcf8cb.jpg);
+          background-repeat: repeat;">
+        <%
+        Negocio obj = new Negocio();
+        String nombre=request.getParameter("user");
+        int idUser=Integer.parseInt(request.getParameter("idUser"));
+        int idProducto=Integer.parseInt(request.getParameter("idprod"));
+        %>
+          <div class="navbar" style="width: 100%;">
+            
+                <div><img src="https://api.freelogodesign.org/assets/thumb/logo/d2c3e55812f3470aab7fe8bff8524420_400.png" class="logo"></div>
+                <div><a href="Menu.jsp" class="opc">Inicio <i class="fa-solid fa-house-chimney"></i></a></div>
+                <div><a href="control?opc=27&iduser=<%=idUser%>&name=<%=nombre%>" class="opc">Juegos <i class="fa-solid fa-gamepad"></i></a></div>
+                <div><a href="control?opc=28&iduser=<%=idUser%>&name=<%=nombre%>" class="opc">Ensambles <i class="fa-solid fa-computer"></i></a></div>
+                <div><a href="control?opc=25&iduser=<%=idUser%>&name=<%=nombre%>" class="opc">Ver carrito <i class="fa-solid fa-cart-shopping"></i></a></div>
+                <div><a href="control?opc=34&iduser=<%=idUser%>&name=<%=nombre%>" class="opc">Ver Facturas <i class="fa-solid fa-rectangle-list"></i></a></div>
+                <div><a href="" class="opc">Soporte <i class="fa-solid fa-gear"></i></a></div>
+                <div class="buscar"><input type="text" id="txtnom" placeholder="Buscar"></div>
+                <div class="loginadmin"><a href="LoginAdmin.jsp" class="opc"><i class="fa-solid fa-address-card"></i> <i class="fa-solid fa-caret-down"></i></a></div>
+               
+        </div>
+        <div class="marco">
+           
+            <h2>Bienvenido: <%=nombre%>  <i class="fa-solid fa-circle-user"></i></h2>  
+            <br>
+        </div> 
+            
+            <%
+            Ensamble x= obj.ListarDetalleEnsamble(idProducto);
+            %>
+        <form action="control" method="post">  
+            
+               <input type="hidden" name="opc" value="30">
+               <input type="hidden" name="idprod" value="<%=idProducto%>">
+               <input type="hidden" name="idensamble" value="<%=x.getIdEnsamble()%>">
+               <input type="hidden" name="iduser" value="<%=idUser%>">
+               <input type="hidden" name="name" value="<%=nombre%>">
+            
+            
+        <div class="detalleart">
+            <div class="imgDetalle">
+                <img src="fotos/<%=x.getNomEnsamble()%>.jpg" width="400" height="400" data-tilt data-tilt-scale="1.2">
+                      
+            </div>
+            <div class="infoDetalle">
+                <h1><%=x.getNomEnsamble()%></h1>
+                <div class="CaracteristicasProducto">
+                <label><b>Modelo: </b><%=x.getModelo()%></label>
+                <br>
+                <label><b>Garantía: </b><%=x.getGarantia()%> meses</label>
+                <br>
+                <label><b>Id Ensamble: </b><%=x.getIdEnsamble()%></label>
+                <br>                
+                </div>
+                
+                
+                <div class="DescripcionProducto">
+                    <p><b>Descripción: </b><%=x.getDescEnsamble()%></p>
+                    <br>
+                    <p><b>Stock: </b><%=x.getStock()%> unidades</p>
+                </div>
+                
+                <div class="Precio">
+                    <h2>Precio unidad: S/ <%=x.getPreEnsamble()%></h2>
+                <input type="number" min="1" max="9" step="1" value="1" name="txtcant">
+                <input type="submit" value="Agregar al Carrito" class="btn btn-primary">
+                </div>
+            </div>
+            
+        </div> 
+        </form>
+
+            <script src="js/vanilla-tilt.min.js" type="text/javascript"></script>
+    </body>
+</html>

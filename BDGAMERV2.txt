@@ -1,0 +1,374 @@
+DROP DATABASE IF EXISTS bdgamer;
+create database bdgamer;
+use bdgamer;
+
+CREATE TABLE administrador
+(
+IdAdmin int PRIMARY KEY AUTO_INCREMENT,
+AdminUser varchar(150),
+Contraseña varbinary(100)
+)AUTO_INCREMENT=1;
+
+INSERT INTO administrador VALUES (null, 'Administrador', aes_encrypt('1234','clave123'));
+
+
+
+CREATE TABLE proveedor(
+IdProveedor int not null primary key AUTO_INCREMENT,
+NomEmpresa varchar(100),
+Direccion varchar(100),
+Telefono int,
+TipoProduc varchar(100),
+IdAdmin int,
+FOREIGN KEY (IdAdmin) REFERENCES administrador(IdAdmin)
+)AUTO_INCREMENT=1;
+
+INSERT INTO proveedor VALUES (null, 'AMD', 'av New York', 130581225, 'Procesadores', 1);
+INSERT INTO proveedor VALUES (null, 'Intel', 'av Japon', 23552525, 'Procesadores', 1);
+INSERT INTO proveedor VALUES (null, 'Hyperx', 'av Argentina', 195781225, 'Perifericos', 1);
+INSERT INTO proveedor VALUES (null, 'Razer', 'av Inglaterra', 964281225, 'Perifericos', 1);
+INSERT INTO proveedor VALUES (null, 'Steam', 'av Virtual', 441581225, 'Juegos', 1);
+INSERT INTO proveedor VALUES (null, 'Gigabyte', 'av Europa', 937181225, 'Placas Madre', 1);
+INSERT INTO proveedor VALUES (null, 'Asus rog', 'av Dinamarca', 693181225, 'Graficas', 1);
+INSERT INTO proveedor VALUES (null, 'Corsair', 'av Italia', 331181225, 'Memorias RAM', 1);
+INSERT INTO proveedor VALUES (null, 'Cooler Master', 'av Quinta', 999181225, 'Fuentes de poder', 1);
+INSERT INTO proveedor VALUES (null, 'Samsung', 'av Lima', 947181225, 'Monitores', 1);
+
+
+CREATE TABLE Producto(
+idProducto int PRIMARY KEY AUTO_INCREMENT,
+stock int(100),
+IdProveedor int,
+FOREIGN KEY (IdProveedor) REFERENCES proveedor(IdProveedor)
+)AUTO_INCREMENT=1000;
+
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,5);
+INSERT INTO Producto VALUES(null,200,8);
+INSERT INTO Producto VALUES(null,200,9);
+INSERT INTO Producto VALUES(null,200,9);
+INSERT INTO Producto VALUES(null,200,8);
+INSERT INTO Producto VALUES(null,200,1);
+INSERT INTO Producto VALUES(null,200,1);
+
+
+
+
+CREATE TABLE juegos(
+IdJuego int not null primary key AUTO_INCREMENT,
+Categoria varchar(100),
+NomJuego varchar(100),
+DescJuego text,
+Precio decimal(10,2),
+AñoLanz int,
+idProducto int,
+FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
+)AUTO_INCREMENT=1;
+#1000 al 1009
+
+INSERT INTO juegos VALUES(null, 'Mundo Abierto', 'GTAV', 'Grand Theft Auto V es un videojuego de acción-aventura de mundo abierto en tercera persona desarrollado por el estudio escocés Rockstar North', 95.00, 2013, 1000);
+INSERT INTO juegos VALUES(null, 'Mundo Abierto', 'Cyberpunk2077','Cyberpunk 2077 es un videojuego perteneciente al género rol de acción y disparos en primera persona', 185.00, 2020, 1001);
+INSERT INTO juegos VALUES(null, 'Shooter', 'CSGO', 'Counter-Strike es una serie de videojuegos tácticos multijugador de disparos en primera persona en los que equipos de terroristas luchan para perpetrar un acto de terror', 8.00, 2012, 1002);
+INSERT INTO juegos VALUES(null, 'Rol', 'Elden Ring', 'Elden Ring es un videojuego de rol de acción desarrollado por FromSoftware y publicado por Bandai Namco Entertainment.', 80.00, 2022, 1003);
+INSERT INTO juegos VALUES(null, 'Aventura', 'God of War Ragnarok', 'God of War Ragnarök es un videojuego de acción y aventuras en tercera persona desarrollado por Santa Monica Studio y publicado por Sony Interactive Entertainment. ', 239.00, 2022, 1004);
+INSERT INTO juegos VALUES(null, 'Aventura','Ark Survival Evolved' ,'Ark: Survival Evolved es un videojuego de acción-aventura y supervivencia desarrollado por Studio Wildcard, Instinct Games, Efecto Studio y Virtual Basement.', 143.00, 2022, 1005);
+INSERT INTO juegos VALUES(null, 'Shooter', 'Valorant', 'Valorant es un hero shooter en primera persona multijugador gratuito desarrollado y publicado por Riot Games.', 15.00, 2020, 1006);
+INSERT INTO juegos VALUES(null, 'Mundo Abierto','Minecraft', 'Minecraft es un videojuego de construcción de tipo «mundo abierto»', 64.00, 2011, 1007);
+INSERT INTO juegos VALUES(null, 'Deporte', 'FIFA 23', 'FIFA 23 es un videojuego de simulación de fútbol publicado por Electronic Arts. Es la trigésima entrega de la serie FIFA desarrollada por EA Sports', 50.00, 2022, 1008);
+INSERT INTO juegos VALUES(null, 'Terror', 'Left 4 Dead 2', 'Left 4 Dead 2 es un videojuego de disparos en primera persona cooperativo de tipo videojuego de terror creado por la compañía Valve.', 22.00, 2009, 1009);
+
+
+CREATE TABLE ensamble(
+IdEnsamble int not null primary key AUTO_INCREMENT,
+PrecioEns decimal(10,2),
+NomEnsamble varchar(100),
+DescEmsamble text,
+Modelo varchar(100),
+Garantía int,
+idProducto int,
+FOREIGN KEY (idProducto) REFERENCES Producto(idProducto)
+)AUTO_INCREMENT=1;
+#1010 al 1015
+
+INSERT INTO ensamble VALUES (null, 2400.00, 'PC gama baja', 'ryzen 5 5600g con 16Gb, 250gb SSD y 500W lo necesario para empezar en el gaming','Personalizado',36, 1010);
+INSERT INTO ensamble VALUES (null, 4500.00, 'PC para diseño', 'ryzen 7 5700g con 32Gb, 1TB SSD y 500W lo necesario para empezar en el modelado 3D','Personalizado',48, 1011);
+INSERT INTO ensamble VALUES (null, 7460.00, 'PC gama media', 'i7 11700k con 32Gb, 2TB SSD, RTX 4060 y 800W lo necesario para jugar todo en ultra','Personalizado',64, 1012);
+INSERT INTO ensamble VALUES (null, 14500.00, 'PC gama alta', 'i9 13900k con 64Gb, 4TB SSD, RTX 4070ti y 1200W, para satisfacer todas tus necesidades sin limite','Personalizado',128, 1013);
+INSERT INTO ensamble VALUES (null, 8900.00, 'PC para streaming', 'i7 13800k con 64Gb, 4TB SSD, RTX 3080 y 1000W lo necesario para empezar en el mundo del streaming','Personalizado',64, 1014);
+INSERT INTO ensamble VALUES (null, 3500.00, 'PC basica', 'i5 5600g con 16Gb, 500GB SSD, RTX 2060 y 600W lo necesario para las tareas del hogas','Personalizado',36, 1015);
+
+
+CREATE TABLE Empleado(
+IDEmpleado int not null PRIMARY KEY AUTO_INCREMENT,
+Nombre varchar(50),
+Direccion varchar(50),
+Genero varchar(50),
+Edad int,
+IdAdmin int,
+FOREIGN KEY (IdAdmin) REFERENCES administrador(IdAdmin)
+)AUTO_INCREMENT = 1000;
+
+INSERT INTO Empleado VALUES (null, 'Juan Carlos', 'av. Arequipa', 'M', 25, 1);
+INSERT INTO Empleado VALUES (null, 'Felipe', 'av. Tomas Valle', 'M', 22, 1);
+INSERT INTO Empleado VALUES (null, 'Eduardo', 'av. Salaverry', 'M', 21, 1);
+INSERT INTO Empleado VALUES (null, 'Anthonny', 'av. Lima', 'M', 20, 1);
+INSERT INTO Empleado VALUES (null, 'Jose', 'av. Abancay', 'M', 19, 1);
+INSERT INTO Empleado VALUES (null, 'Pedro', 'av. Barrios Altos', 'M', 18, 1);
+INSERT INTO Empleado VALUES (null, 'Gonzalo', 'av. Wilson', 'M', 26, 1);
+INSERT INTO Empleado VALUES (null, 'Alan', 'av. Faucett', 'M', 23, 1);
+INSERT INTO Empleado VALUES (null, 'Esteban', 'av. Argentina', 'M', 21, 1);
+INSERT INTO Empleado VALUES (null, 'Jordi', 'av. Evitamiento', 'M', 21, 1);
+
+
+CREATE TABLE cliente(
+IdCliente int not null primary key AUTO_INCREMENT,
+NombreCli varchar(100),
+ApellidoCli varchar(100),
+Sexo varchar(100),
+DNI int,
+Edad int,
+Direccion varchar(100),
+Correo varchar(100),
+Pass varbinary(100),
+IDEmpleado int,
+FOREIGN KEY (IDEmpleado) REFERENCES Empleado(IDEmpleado)
+)AUTO_INCREMENT=1;
+
+#1000 al 1009
+INSERT INTO cliente VALUES (null, 'Lionel', 'Gutierrez', 'M', 74635921, 18, 'av Lima','kl72r@gmail.com',aes_encrypt('1234','clave123'),1000);
+INSERT INTO cliente VALUES (null, 'Carls', 'Gutierrez', 'M', 74635921, 28, 'av Lima','gsgfgr@gmail.com',aes_encrypt('1234','clave123'),1000);
+INSERT INTO cliente VALUES (null, 'Jaciento', 'Gutierrez', 'M', 74635921, 48, 'av Lima','kyss@gmail.com',aes_encrypt('1234','clave123'),1000);
+INSERT INTO cliente VALUES (null, 'Pedro', 'Gutierrez', 'M', 74635921, 19, 'av Lima','ktssr@gmail.com',aes_encrypt('1234','clave123'),1001);
+INSERT INTO cliente VALUES (null, 'Adolfo', 'Gutierrez', 'M', 74635921, 32, 'av Lima','twasfr@gmail.com',aes_encrypt('1234','clave123'),1001);
+INSERT INTO cliente VALUES (null, 'Alexander', 'Gutierrez', 'M', 74635921, 45, 'av Lima','tasg@gmail.com',aes_encrypt('1234','clave123'),1001);
+INSERT INTO cliente VALUES (null, 'Paolo', 'Gutierrez', 'M', 74635921, 15, 'av Lima','jdyd@gmail.com',aes_encrypt('1234','clave123'),1002);
+INSERT INTO cliente VALUES (null, 'Alexandra', 'Gutierrez', 'M', 74635921, 17, 'av Lima','idbf@gmail.com',aes_encrypt('1234','clave123'),1002);
+INSERT INTO cliente VALUES (null, 'Ibeth', 'Gutierrez', 'M', 74635921, 19, 'av Lima','idkwd@gmail.com',aes_encrypt('1234','clave123'),1002);
+INSERT INTO cliente VALUES (null, 'Leonardo', 'Gutierrez', 'M', 74635921, 50, 'av Lima','eunafd@gmail.com',aes_encrypt('1234','clave123'),1003);
+INSERT INTO cliente VALUES (null, 'Jose Gabriel', 'Gutierrez', 'M', 74635921, 34, 'av Lima','itbha@gmail.com',aes_encrypt('1234','clave123'),1003);
+INSERT INTO cliente VALUES (null, 'Andres', 'Gutierrez', 'M', 74635921, 23, 'av Lima','j3nai@gmail.com',aes_encrypt('1234','clave123'),1003);
+INSERT INTO cliente VALUES (null, 'Federico', 'Gutierrez', 'M', 74635921, 46, 'av Lima','mjd9a2@gmail.com',aes_encrypt('1234','clave123'),1004);
+INSERT INTO cliente VALUES (null, 'Paul', 'Gutierrez', 'M', 74635921, 12, 'av Lima','fjf72s@gmail.com',aes_encrypt('1234','clave123'),1004);
+INSERT INTO cliente VALUES (null, 'Noice', 'Gutierrez', 'M', 74635921, 67, 'av Lima','fjya7@gmail.com',aes_encrypt('1234','clave123'),1004);
+INSERT INTO cliente VALUES (null, 'Carmen', 'Gutierrez', 'M', 74635921, 34, 'av Lima','fjmyr7@gmail.com',aes_encrypt('1234','clave123'),1005);
+INSERT INTO cliente VALUES (null, 'Rosa', 'Gutierrez', 'M', 74635921, 30, 'av Lima','fjrya7@gmail.com',aes_encrypt('1234','clave123'),1005);
+INSERT INTO cliente VALUES (null, 'Augusto', 'Gutierrez', 'M', 74635921, 21, 'av Lima','gkru7@gmail.com',aes_encrypt('1234','clave123'),1005);
+INSERT INTO cliente VALUES (null, 'Carla', 'Gutierrez', 'M', 74635921, 24, 'av Lima','furna7@gmail.com',aes_encrypt('1234','clave123'),1006);
+INSERT INTO cliente VALUES (null, 'Gustavo', 'Gutierrez', 'M', 74635921, 25, 'av Lima','fjka7@gmail.com',aes_encrypt('1234','clave123'),1006);
+INSERT INTO cliente VALUES (null, 'Karina', 'Gutierrez', 'M', 74635921, 31, 'av Lima','gdg@gmail.com',aes_encrypt('1234','clave123'),1006);
+INSERT INTO cliente VALUES (null, 'Junior', 'Gutierrez', 'M', 74635921, 32, 'av Lima','setds@gmail.com',aes_encrypt('1234','clave123'),1007);
+INSERT INTO cliente VALUES (null, 'Horacio', 'Gutierrez', 'M', 74635921, 35, 'av Lima','gsdgs@gmail.com',aes_encrypt('1234','clave123'),1007);
+INSERT INTO cliente VALUES (null, 'Issac', 'Gutierrez', 'M', 74635921, 14, 'av Lima','qeqqr@gmail.com',aes_encrypt('1234','clave123'),1007);
+INSERT INTO cliente VALUES (null, 'Jack', 'Gutierrez', 'M', 74635921, 14, 'av Lima','tkqha@gmail.com',aes_encrypt('1234','clave123'),1008);
+INSERT INTO cliente VALUES (null, 'Sofia', 'Gutierrez', 'M', 74635921, 14, 'av Lima','gusa@gmail.com',aes_encrypt('1234','clave123'),1008);
+INSERT INTO cliente VALUES (null, 'Herman', 'Gutierrez', 'M', 74635921, 18, 'av Lima','jiuash@gmail.com',aes_encrypt('1234','clave123'),1008);
+INSERT INTO cliente VALUES (null, 'Jordi', 'Gutierrez', 'M', 74635921, 18, 'av Lima','mvua@gmail.com',aes_encrypt('1234','clave123'),1009);
+INSERT INTO cliente VALUES (null, 'Jonny', 'Gutierrez', 'M', 74635921, 18, 'av Lima','fkayaq@gmail.com',aes_encrypt('1234','clave123'),1009);
+INSERT INTO cliente VALUES (null, 'Ale', 'Gutierrez', 'M', 74635921, 18, 'av Lima','jrar@gmail.com',aes_encrypt('1234','clave123'),1009);
+
+
+CREATE TABLE transporte(
+IdTransporte int not null primary key AUTO_INCREMENT,
+NomCondutor varchar(100),
+Placa varchar(100),
+TipoTrans varchar(100)
+)AUTO_INCREMENT=100;
+
+
+INSERT INTO transporte VALUES (null, 'Carlos', 'B75-584', 'Minivan');
+INSERT INTO transporte VALUES (null, 'Estefano', 'Y65-694', 'Camion');
+INSERT INTO transporte VALUES (null, 'NoSoyVenezolano', 'L77-567', 'Motocicleta');
+INSERT INTO transporte VALUES (null, 'Pablo', 'A77-934', 'Trailer');
+INSERT INTO transporte VALUES (null, 'Erika', 'C65-234', 'Furgoneta');
+INSERT INTO transporte VALUES (null, 'Bot', null, 'Entrega virtual');
+
+
+CREATE TABLE Factura(
+IdFactura int not null PRIMARY KEY AUTO_INCREMENT,
+FechaFac datetime, 
+Monto decimal(10,2),
+fac_igv varchar(10), # S o N
+IdCliente int,
+IdTransporte int,
+FOREIGN KEY (IdCliente) REFERENCES cliente(IdCliente),
+FOREIGN KEY (IdTransporte) REFERENCES transporte(IdTransporte)
+)AUTO_INCREMENT=100;
+
+#1 al 30
+INSERT INTO `factura` (`IdFactura`, `FechaFac`, `Monto`, `fac_igv`, `IdCliente`, `IdTransporte`) VALUES
+(100, '2023-12-10 00:00:00', 2550.00, 'S', 1, 100),
+(101, '2023-08-10 00:00:00', 3550.00, 'S', 1, 100),
+(102, '2023-10-10 00:00:00', 5550.00, 'S', 1, 100),
+(103, '2023-12-10 00:00:00', 1550.00, 'S', 1, 100),
+(104, '2023-10-10 00:00:00', 550.00, 'M', 2, 100),
+(105, '2023-12-10 00:00:00', 250.00, 'M', 2, 100),
+(106, '2023-10-10 00:00:00', 3250.00, 'S', 2, 100),
+(107, '2023-10-10 00:00:00', 6750.00, 'S', 2, 100),
+(108, '2023-10-10 00:00:00', 8750.00, 'M', 2, 100),
+(109, '2023-12-10 00:00:00', 40.00, 'S', 2, 100),
+(110, '2023-11-10 00:00:00', 2550.00, 'M', 3, 100),
+(111, '2023-10-10 00:00:00', 3550.00, 'S', 3, 100),
+(112, '2023-10-10 00:00:00', 5550.00, 'S', 3, 100),
+(113, '2023-10-10 00:00:00', 1550.00, 'S', 3, 100),
+(114, '2023-10-10 00:00:00', 550.00, 'S', 3, 100),
+(115, '2023-10-10 00:00:00', 2550.00, 'M', 4, 100),
+(116, '2023-08-10 00:00:00', 5232.00, 'M', 4, 100),
+(117, '2023-10-10 00:00:00', 5550.00, 'M', 4, 105),
+(118, '2023-10-10 00:00:00', 1550.00, 'S', 4, 105),
+(119, '2023-12-10 00:00:00', 550.00, 'S', 4, 105),
+(120, '2023-10-08 00:00:00', 6253.00, 'S', 5, 105),
+(121, '2023-10-10 00:00:00', 3550.00, 'S', 5, 105),
+(122, '2023-11-10 00:00:00', 5614.00, 'S', 5, 105),
+(123, '2023-11-10 00:00:00', 1550.00, 'S', 5, 105),
+(124, '2023-10-11 00:00:00', 550.00, 'S', 5, 105),
+(125, '2023-09-10 00:00:00', 2550.00, 'M', 6, 105),
+(126, '2023-10-10 00:00:00', 3550.00, 'M', 6, 105),
+(127, '2023-10-10 00:00:00', 5550.00, 'M', 6, 105),
+(128, '2023-09-10 00:00:00', 15260.00, 'S', 6, 105),
+(129, '2023-10-10 00:00:00', 550.00, 'S', 6, 105),
+(130, '2023-10-10 00:00:00', 2250.00, 'S', 7, 105),
+(131, '2023-09-10 00:00:00', 1450.00, 'M', 7, 105),
+(132, '2023-06-10 00:00:00', 5520.00, 'M', 7, 105),
+(133, '2023-10-10 00:00:00', 1550.00, 'S', 7, 105),
+(134, '2023-07-10 00:00:00', 550.00, 'S', 7, 105),
+(135, '2023-07-10 00:00:00', 2550.00, 'S', 8, 105),
+(136, '2023-10-10 00:00:00', 3550.00, 'M', 8, 105),
+(137, '2023-10-10 00:00:00', 5550.00, 'M', 8, 105),
+(138, '2023-09-10 00:00:00', 1550.00, 'S', 8, 105),
+(139, '2023-09-10 00:00:00', 550.00, 'S', 8, 105),
+(140, '2023-06-10 00:00:00', 2550.00, 'S', 9, 105),
+(141, '2023-10-10 00:00:00', 3550.00, 'S', 9, 105),
+(142, '2023-10-10 00:00:00', 5550.00, 'S', 9, 105),
+(143, '2023-10-10 00:00:00', 1550.00, 'S', 9, 105),
+(144, '2023-10-10 00:00:00', 550.00, 'S', 9, 105),
+(145, '2023-07-10 00:00:00', 2550.00, 'M', 10, 105),
+(146, '2023-06-10 00:00:00', 3550.00, 'M', 10, 105),
+(147, '2023-10-10 00:00:00', 5550.00, 'M', 10, 105),
+(148, '2023-10-10 00:00:00', 1550.00, 'S', 10, 105),
+(149, '2023-06-10 00:00:00', 550.00, 'S', 10, 101),
+(150, '2023-06-10 00:00:00', 2550.00, 'S', 11, 101),
+(151, '2023-05-10 00:00:00', 3550.00, 'S', 11, 101),
+(152, '2023-05-10 00:00:00', 5550.00, 'S', 11, 101),
+(153, '2023-10-10 00:00:00', 1550.00, 'S', 11, 101),
+(154, '2023-05-10 00:00:00', 550.00, 'S', 12, 101),
+(155, '2023-05-10 00:00:00', 250.00, 'S', 12, 101),
+(156, '2023-03-10 00:00:00', 3250.00, 'S', 12, 101),
+(157, '2023-03-10 00:00:00', 6750.00, 'S', 12, 101),
+(158, '2023-03-10 00:00:00', 8750.00, 'S', 12, 101),
+(159, '2023-05-10 00:00:00', 40.00, 'S', 12, 101),
+(160, '2023-03-10 00:00:00', 2550.00, 'M', 13, 101),
+(161, '2023-10-10 00:00:00', 3550.00, 'M', 13, 101),
+(162, '2023-03-10 00:00:00', 5140.00, 'M', 13, 101),
+(163, '2023-10-10 00:00:00', 1550.00, 'M', 13, 101),
+(164, '2023-10-10 00:00:00', 550.00, 'S', 13, 101),
+(165, '2023-10-10 00:00:00', 2550.00, 'S', 14, 101),
+(166, '2023-10-10 00:00:00', 3550.00, 'M', 14, 101),
+(167, '2023-10-10 00:00:00', 5550.00, 'M', 14, 101),
+(168, '2023-04-10 00:00:00', 1550.00, 'S', 14, 101),
+(169, '2023-10-10 00:00:00', 550.00, 'S', 14, 101),
+(170, '2023-10-10 00:00:00', 2550.00, 'S', 15, 101),
+(171, '2023-04-10 00:00:00', 3550.00, 'S', 15, 101),
+(172, '2023-10-10 00:00:00', 55000.00, 'S', 15, 101),
+(173, '2023-04-10 00:00:00', 1550.00, 'S', 15, 101),
+(174, '2023-04-10 00:00:00', 550.00, 'S', 15, 102),
+(175, '2023-03-10 00:00:00', 21450.00, 'S', 16, 102),
+(176, '2023-03-10 00:00:00', 3550.00, 'S', 16, 102),
+(177, '2023-03-10 00:00:00', 5550.00, 'S', 16, 102),
+(178, '2023-02-10 00:00:00', 1550.00, 'S', 16, 102),
+(179, '2023-02-10 00:00:00', 550.00, 'S', 16, 102),
+(180, '2023-02-10 00:00:00', 2550.00, 'M', 17, 102),
+(181, '2023-10-10 00:00:00', 3550.00, 'M', 17, 102),
+(182, '2023-10-10 00:00:00', 5550.00, 'M', 17, 102),
+(183, '2023-10-10 00:00:00', 1550.00, 'M', 17, 102),
+(184, '2023-02-10 00:00:00', 550.00, 'M', 17, 102),
+(185, '2023-02-10 00:00:00', 2550.00, 'S', 18, 102),
+(186, '2023-10-10 00:00:00', 3550.00, 'S', 18, 102),
+(187, '2023-02-10 00:00:00', 5550.00, 'S', 18, 102),
+(188, '2023-10-10 00:00:00', 1550.00, 'S', 18, 102),
+(189, '2023-10-10 00:00:00', 550.00, 'S', 18, 102),
+(190, '2023-02-10 00:00:00', 2550.00, 'S', 19, 102),
+(191, '2023-10-10 00:00:00', 15235.00, 'S', 19, 102),
+(192, '2023-10-10 00:00:00', 5550.00, 'S', 19, 102),
+(193, '2023-10-10 00:00:00', 15610.00, 'S', 19, 102),
+(194, '2023-10-10 00:00:00', 550.00, 'S', 19, 102),
+(195, '2023-02-10 00:00:00', 2550.00, 'M', 20, 102),
+(196, '2023-10-10 00:00:00', 3550.00, 'M', 20, 102),
+(197, '2023-10-10 00:00:00', 5550.00, 'M', 20, 102),
+(198, '2023-10-10 00:00:00', 1550.00, 'M', 20, 102),
+(199, '2023-02-10 00:00:00', 5129.00, 'S', 20, 102),
+(200, '2023-01-10 00:00:00', 2550.00, 'S', 21, 102),
+(201, '2023-01-10 00:00:00', 135.00, 'S', 21, 102),
+(202, '2023-01-10 00:00:00', 5550.00, 'S', 21, 102),
+(203, '2023-01-10 00:00:00', 1550.00, 'S', 21, 102),
+(204, '2023-01-10 00:00:00', 550.00, 'S', 22, 103),
+(205, '2023-10-10 00:00:00', 2531.00, 'S', 22, 103),
+(206, '2023-10-10 00:00:00', 3250.00, 'S', 22, 103),
+(207, '2023-10-10 00:00:00', 6750.00, 'S', 22, 103),
+(208, '2023-10-10 00:00:00', 8750.00, 'S', 22, 103),
+(209, '2023-01-10 00:00:00', 40.00, 'S', 22, 103),
+(210, '2023-10-10 00:00:00', 2530.00, 'S', 23, 103),
+(211, '2023-10-10 00:00:00', 3550.00, 'S', 23, 103),
+(212, '2023-10-10 00:00:00', 56750.00, 'S', 23, 103),
+(213, '2023-10-10 00:00:00', 1550.00, 'S', 23, 103),
+(214, '2023-10-10 00:00:00', 570.00, 'S', 23, 103),
+(250, '2023-07-10 00:00:00', 5550.00, 'M', 8, 105);
+
+
+
+
+
+CREATE TABLE compra(
+IdCompra int not null primary key AUTO_INCREMENT,
+NombreCompra varchar(100),
+PrecioCompra numeric(15,2),
+CantidadCompra int,
+IdCliente int,
+idProducto int,
+FOREIGN KEY (IdCliente) REFERENCES cliente(IdCliente),
+FOREIGN KEY (idProducto) REFERENCES producto(idProducto)
+)AUTO_INCREMENT=100;
+
+create TABLE detallefactura(
+idDetalle int NOT null PRIMARY KEY AUTO_INCREMENT,
+NombreProducto varchar(100),
+PrecioProducto decimal(20,5),
+CantidadComprada int,
+IdFactura int,
+idProducto int,    
+FOREIGN KEY (IdFactura) REFERENCES factura (IdFactura),
+FOREIGN KEY (idProducto) REFERENCES producto (idProducto)    
+)AUTO_INCREMENT=10;
+
+CREATE OR REPLACE TRIGGER actualizar_stock 
+AFTER INSERT ON detallefactura FOR EACH ROW
+Update producto
+set producto.stock = producto.stock - new.CantidadComprada
+where producto.idProducto = new.idProducto;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spJuegoDetalle`(IN `code` INT)
+SELECT IdJuego, Categoria, NomJuego, DescJuego, Precio, AñoLanz, stock from juegos as j INNER JOIN producto as p ON j.idProducto=p.idProducto WHERE p.idProducto=code$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spEnsambleDetalle`(IN `code` INT)
+SELECT IdEnsamble, PrecioEns, NomEnsamble, DescEmsamble, Modelo, Garantía, e.idProducto, stock FROM ensamble as e inner JOIN producto as p ON e.idProducto=p.idProducto WHERE e.idProducto=CODE$$
+DELIMITER ;
+
+
+
+ALTER TABLE `cliente` DROP FOREIGN KEY `cliente_ibfk_1`; ALTER TABLE `cliente` ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`IDEmpleado`) REFERENCES `empleado`(`IDEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `factura` DROP FOREIGN KEY `factura_ibfk_1`; ALTER TABLE `factura` ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`IdCliente`) REFERENCES `cliente`(`IdCliente`) ON DELETE CASCADE ON UPDATE CASCADE; 
+ALTER TABLE `factura` DROP FOREIGN KEY `factura_ibfk_2`; ALTER TABLE `factura` ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`IdTransporte`) REFERENCES `transporte`(`IdTransporte`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `proveedor` DROP FOREIGN KEY `proveedor_ibfk_1`; ALTER TABLE `proveedor` ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`IdAdmin`) REFERENCES `administrador`(`IdAdmin`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `producto` DROP FOREIGN KEY `producto_ibfk_1`; ALTER TABLE `producto` ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`IdProveedor`) REFERENCES `proveedor`(`IdProveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `juegos` DROP FOREIGN KEY `juegos_ibfk_1`; ALTER TABLE `juegos` ADD CONSTRAINT `juegos_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto`(`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `ensamble` DROP FOREIGN KEY `ensamble_ibfk_1`; ALTER TABLE `ensamble` ADD CONSTRAINT `ensamble_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `producto`(`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;

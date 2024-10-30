@@ -1,0 +1,689 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@1,700&family=Raleway&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  text-align: center;
+  color: rgba(87, 87, 87);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://i.blogs.es/ad1314/mhbyl4nzgrf6xcxdhsdfbhofwe/1366_2000.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.containerLogin p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+}
+
+.containerLogin span {
+  font-size: 12px;
+}
+
+.containerLogin a {
+  color: #333;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 15px 0 10px;
+}
+
+.containerLogin button {
+  background-color: #000000;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.containerLogin button.hidden {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+.containerLogin form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+}
+
+.containerLogin input {
+  background-color: #eee;
+  border: none;
+  margin: 5px 0;
+  padding: 10px 12px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  width: 100%;
+  outline: none;
+}
+
+.close {
+    margin-left: 105%;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+input[type="submit"] {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #8a0303;
+  color: #ffffff;
+}
+
+.form-containerLogin {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.containerLogin.active .sign-in {
+  transform: translateX(100%);
+}
+
+.sign-up {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.containerLogin.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6s;
+}
+
+@keyframes move {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.social-icons {
+  margin: 20px 0;
+}
+
+.social-icons a {
+  border: 1px solid #ccc;
+  border-radius: 20%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  width: 40px;
+  height: 40px;
+}
+
+.toggle-containerLogin {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  z-index: 1000;
+}
+
+.containerLogin.active .toggle-containerLogin {
+  transform: translateX(-100%);
+}
+
+.toggle {
+  background-image: url(https://images.alphacoders.com/519/519792.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  background: linear-gradient(to right, #13172c, #b5b3bb);
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.containerLogin.active .toggle {
+  transform: translateX(50%);
+}
+
+.toggle-panel {
+  background-image: url(https://i.blogs.es/08d770/por-que-kratos-es-inmortal/1366_2000.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 30px;
+  text-align: center;
+  top: 0;
+  transform: translateX(0);
+  transition: all 0.6s ease-in-out;
+}
+
+.toggle-containerLogin h1 {
+  font-size: 36px;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.toggle-containerLogin h1 {
+    font-size: 36px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+    text-align: center;
+  }
+
+.toggle-left {
+  transform: translateX(-200%);
+}
+
+.containerLogin.active .toggle-left {
+  transform: translateX(0);
+}
+
+.toggle-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.containerLogin.active .toggle-right {
+  transform: translateX(200%);
+}
+
+.containerLogin label {
+  display: inline-block;
+  margin-right: 50px;
+}
+
+.radio-buttons {
+  padding: 10px;
+  display: inline-flex;
+}
+
+.radio-buttons input[type="radio"] {
+  margin: 5px;
+  width: auto;
+  display: inline;
+}
+
+.radio-buttons label {
+  margin-left: 5px; /* Margen entre botones de radio y etiquetas */
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.menu li {
+  display: inline-block;
+  padding: 0 120px;
+}
+.menu ul > li {
+  transition: all 0.3s ease;
+}
+
+.menu ul > li:hover {
+  transform: scale(1.2);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.modal-content {
+  margin: 0 auto; /* Elimina el margen superior y lo centra horizontalmente */
+  padding: 20px;
+  width: 65%;
+  height: 90%;
+  position: fixed;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Centra tanto vertical como horizontalmente */
+}
+
+.link {
+  color: white;
+  font-family: "Raleway";
+  font-weight: 10000;
+  padding: 10px;
+  position: relative;
+  font-size: 15px;
+}
+
+.link:after {
+  content: "";
+  width: 0;
+  height: 4px;
+  background-color: rgb(175, 6, 31);
+  position: absolute;
+  bottom: 0px;
+  right: 50%;
+  transition: all 0.5s;
+  will-change: width;
+}
+
+.link:hover::after {
+  width: 100%;
+  right: 0;
+}
+/* Estilos para pantallas pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+  .menu li {
+    padding: 0 10px; /* Reduzca el espacio entre elementos del menú */
+  }
+  .menu ul > li:hover {
+    transform: none; /* Elimine la transformación al hacer hover en pantallas pequeñas */
+  }
+  .link {
+    font-size: 12px; /* Reduzca el tamaño del texto en pantallas pequeñas */
+  }
+}
+
+h1 {
+  font-size: 3.9rem;
+  color: white;
+  font-family: "Luna";
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.FormLogin h1 {
+  font-size: 36px;
+  color: black;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 {
+  font-size: 3.5rem;
+  color: white;
+  font-family: "Luna";
+  font-weight: 500;
+  text-align: center;
+}
+
+p {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  max-width: 50ch;
+  line-height: 1.6;
+  padding: 3.3em;
+  font-weight: 580;
+  color: white;
+}
+
+a {
+  display: inline-block;
+  padding: 1em 3, 5em;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 0.87rem;
+}
+
+.second {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url("https://www.10wallpaper.com/wallpaper/1920x1080/1207/The_Last_of_US_Game_HD_Wallpaper_10_1920x1080.jpg");
+
+  background-size: cover;
+  background-attachment: fixed;
+  height: 1200px;
+}
+.second h1 {
+  font-size: 4.9rem;
+  color: whitesmoke;
+  font-family: "Luna";
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-align: center;
+  padding-bottom: 300px;
+}
+
+.tree {
+  background-image: url(https://images.alphacoders.com/771/771098.jpg);
+  background-attachment: fixed;
+  height: 1200px;
+}
+
+.blank {
+  width: 100%;
+  height: 50vh;
+  background-color: black;
+  font-family: "Luna";
+}
+footer {
+  background-color: black;
+}
+.footerContainer {
+  font-family: "Luna";
+  width: 100%;
+  padding: 70px 30px 20px;
+  background-color: black;
+}
+
+.footerNav {
+  margin: 20px 0;
+  font-family: "Luna";
+}
+.footerNav ul {
+  display: flex;
+  justify-content: center;
+  font-family: "Luna";
+}
+.footerNav ul li a {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: white;
+  margin: 25px;
+  text-decoration: none;
+  font-size: 1.3em;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+.footerNav ul li a:hover {
+  opacity: 1;
+}
+.footerBottom {
+  font-family: "Luna";
+  background-color: black;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.footerBottom p {
+  color: white;
+}
+.designer {
+  opacity: 0.7;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin: 0px 5px;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+.wrapper a {
+  color: white;
+}
+
+.hover-fx,
+.hover-fx-1,
+.hover-fx-2,
+.hover-fx-3 {
+  font-size: 2rem;
+  display: inline-block;
+  cursor: pointer;
+  margin: 15px;
+  width: 80px;
+  height: 80px;
+  line-height: 84px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  color: white;
+  background-color: black;
+  transition: 300ms;
+}
+
+.hover-fx {
+  background-color: blue;
+}
+
+.hover-fx-1 {
+  background-color: purple;
+}
+
+.hover-fx-2 {
+  background-color: skyblue;
+}
+
+.hover-fx-3 {
+  background-color: red;
+}
+
+.hover-fx:after {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: "";
+  box-sizing: content-box;
+  box-shadow: 0 0 0 3px white;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 300ms;
+}
+.hover-fx-1:after {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: "";
+  box-sizing: content-box;
+  box-shadow: 0 0 0 3px rgb(2, 0, 0);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 300ms;
+}
+.hover-fx-2:after {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: "";
+  box-sizing: content-box;
+  box-shadow: 0 0 0 3px white;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 300ms;
+}
+.hover-fx-3:after {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  content: "";
+  box-sizing: content-box;
+  box-shadow: 0 0 0 3px white;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: 300ms;
+}
+
+.hover-fx:hover:after {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px blue, 0px 0px 50px blue, 0px 0px 100px blue;
+}
+.hover-fx-1:hover:after {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px purple, 0px 0px 50px purple, 0px 0px 100px purple;
+}
+
+.hover-fx-2:hover:after {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px skyblue, 0px 0px 50px skyblue, 0px 0px 100px skyblue;
+}
+
+.hover-fx-3:hover:after {
+  opacity: 1;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px red, 0px 0px 50px red, 0px 0px 100px red;
+}
+
+@media (max-width: 700px) {
+  .footerNav ul {
+    flex-direction: column;
+  }
+  .footerNav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+  }
+}
+
+.box {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: animate 15s linear infinite;
+  margin-bottom: 400px;
+}
+@keyframes animate {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+.box span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+  -webkit-box-reflect: below 0px
+    linear-gradient(transparent, transparent, #0004);
+}
+.box span img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para pantallas medianas (481px a 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .menu li {
+    padding: 0 20px; /* Ajuste el espacio entre elementos del menú */
+  }
+}
+
+/* Estilos para pantallas grandes (769px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .menu li {
+    padding: 0 50px; /* Ajuste el espacio entre elementos del menú */
+  }
+}
+
+/* Estilos para pantallas extra grandes (más de 1024px) */
+@media (min-width: 1025px) and (max-width: 1080px) {
+  .menu li {
+    padding: 0 40px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1366px) {
+  .menu li {
+    padding: 0 60px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1366px) {
+  .container p {
+    font-family: "Raleway", sans-serif;
+    font-size: 20px;
+    max-width: 50ch;
+    line-height: 1.6;
+    padding: 0em;
+    font-weight: 580;
+    color: white;
+  }
+}
